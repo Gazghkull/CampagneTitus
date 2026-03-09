@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Configuration</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Carte</a>
+  <a href="admin.html" class="admin-only">Admin</a>
+  <a href="config.html" class="admin-only">Config</a>
+</nav>
+
+<h1>Ajouter un système</h1>
+
+<input id="name" placeholder="Nom">
+<select id="type">
+  <option value="planet">Planète</option>
+  <option value="moon">Lune</option>
+</select>
+<input id="slots" placeholder="Nombre d'emplacements d'infrastructures">
+<button id="addSystemBtn">Ajouter</button>
+
+<h1>Configuration des connexions</h1>
+
+<label>Depuis :</label>
+<select id="from_system"></select>
+
+<label>Vers :</label>
+<select id="to_system"></select>
+
+<button id="addConnection">Ajouter connexion</button>
+
+<ul id="connectionsList"></ul>
+
+
+<div id="fleetControl">
+  <button id="fleetMinus">-</button>
+  <span id="fleetCount">5</span>
+  <button id="fleetPlus">+</button>
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/config.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+# Node modules
+node_modules/
+
+# Base de données
+*.sqlite
+*.sqlite3
+*.db
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+
+# Build
+dist/
+build/

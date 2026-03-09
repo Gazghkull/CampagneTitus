@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Carte de campagne</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Carte</a>
+  <a href="admin.html" class="admin-only">Admin</a>
+  <a href="config.html" class="admin-only">Config</a>
+  <button id="editModeBtn" class="admin-only">
+  ✏️ Mode édition
+</button>
+</nav>
+
+<div id="map"></div>
+
+<script src="js/auth.js"></script>
+<script src="js/map.js"></script>
+
+<script>
+  // Redirection intelligente vers login si aucun rôle
+  fetch("/api/me")
+    .then(r => r.json())
+    .then(user => {
+      const roleFromSession = sessionStorage.getItem("role");
+      const role = user.role || roleFromSession || null;
+
+      if (!role) {
+        window.location.href = "login.html";
+      }
+    })
+    .catch(() => {
+      // En cas d'erreur fetch, redirection vers login
+      window.location.href = "login.html";
+    });
+</script>
+
+</body>
+</html>

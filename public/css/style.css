@@ -1,0 +1,150 @@
+/* RESET DE BASE */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0a0d14;
+  color: #eee;
+}
+
+/* NAVIGATION */
+nav {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 20px;
+  background: #111;
+  border-bottom: 1px solid #333;
+}
+
+nav a {
+  color: #ddd;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: white;
+}
+
+/* CONTENU */
+#map {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 50px);
+  background: radial-gradient(circle, #1a2033, #000);
+}
+
+/* ADMIN */
+.admin-only {
+  display: inline;
+}
+
+/* ---------- DETAIL MENU ---------- */
+#detailMenu {
+  font-size: 14px;
+  border-radius: 5px;
+  background: rgba(34, 34, 34, 0.95);
+  border: 2px solid #fff;
+  padding: 10px;
+  min-width: 250px;
+  max-width: 300px;
+  z-index: 1000;
+}
+
+#detailMenu h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  text-align: center;
+  border-bottom: 1px solid #555;
+  padding-bottom: 5px;
+}
+
+/* POWER CONTROLS */
+#detailMenu div > div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+#detailMenu button {
+  cursor: pointer;
+  background: #222;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 3px;
+  padding: 2px 6px;
+  font-size: 12px;
+  margin: 0 2px;
+  transition: 0.2s;
+}
+
+#detailMenu button:hover {
+  background: #444;
+  border-color: #888;
+}
+
+#detailMenu span {
+  display: inline-block;
+  text-align: center;
+  width: 40px;
+}
+
+/* INFRASTRUCTURE */
+#detailMenu div:nth-child(2) button {
+  min-width: 60px;
+  text-align: center;
+  background: #111;
+  border: 1px solid #666;
+  padding: 4px 6px;
+}
+
+#detailMenu div:nth-child(2) button:hover {
+  background: #333;
+  border-color: #aaa;
+}
+
+/* INFRA MENU */
+#infraMenu {
+  font-size: 14px;
+  border-radius: 5px;
+  background: rgba(51, 51, 51, 0.95);
+  border: 2px solid #fff;
+  padding: 8px;
+  min-width: 200px;
+  max-width: 220px;
+  z-index: 1100;
+  position: absolute;
+}
+
+#infraMenu button {
+  display: block;
+  width: 100%;
+  margin: 3px 0;
+  background: #222;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 3px;
+  padding: 4px 6px;
+  font-size: 12px;
+}
+
+#infraMenu button:hover {
+  background: #444;
+  border-color: #888;
+}
+
+/* TOOLTIP / HOVER TEXT */
+canvas {
+  cursor: default;
+}
+
+/* FLEET ICON */
+canvas img.fleet-icon {
+  width: 12px;
+  height: 12px;
+}
