@@ -312,35 +312,39 @@ function showDetailMenu(system) {
   detailMenu.innerHTML = `<h3>${system.name}</h3>`;
   stopMenuPropagation(detailMenu);
 
-  // --- POWER CONTROL ---
-  const powerDiv = document.createElement("div");
-  powerDiv.innerHTML = "<b>Puissance par alliance :</b><br>";
-  system.powers.forEach(p => {
-    const row = document.createElement("div");
-    row.style.marginBottom = "5px";
-    row.style.display = "flex";
-    row.style.alignItems = "center";
-    row.innerHTML = `
-      <button class="decrease">-</button>
-      <span style="width:40px;text-align:center"> ${p.value} </span>
-      <button class="increase">+</button>
-      <span style="margin-left:5px">${ALLIANCES[p.alliance_id]}</span>
-    `;
-    row.querySelector(".decrease").onclick = () => {
-      if (p.value > 0) p.value--;
-      updatePower(system.id, p.alliance_id, p.value);
-      drawMap();
-      showDetailMenu(system);
-    };
-    row.querySelector(".increase").onclick = () => {
-      if (p.value < 4) p.value++;
-      updatePower(system.id, p.alliance_id, p.value);
-      drawMap();
-      showDetailMenu(system);
-    };
-    powerDiv.appendChild(row);
-  });
-  detailMenu.appendChild(powerDiv);
+// --- POWER CONTROL ---
+const powerDiv = document.createElement("div");
+powerDiv.innerHTML = "<b>Puissance par alliance :</b><br>";
+
+// 🔹 Fix ordre des alliances
+const allianceOrder = [1, 2, 3]; // Défenseur, Envahisseur, Pirate
+allianceOrder.forEach(allianceId => {
+  const p = system.powers.find(power => power.alliance_id === allianceId) || { value: 0 };
+  const row = document.createElement("div");
+  row.style.marginBottom = "5px";
+  row.style.display = "flex";
+  row.style.alignItems = "center";
+  row.innerHTML = `
+    <button class="decrease">-</button>
+    <span style="width:40px;text-align:center"> ${p.value} </span>
+    <button class="increase">+</button>
+    <span style="margin-left:5px">${ALLIANCES[allianceId]}</span>
+  `;
+  row.querySelector(".decrease").onclick = () => {
+    if (p.value > 0) p.value--;
+    updatePower(system.id, allianceId, p.value);
+    drawMap();
+    showDetailMenu(system);
+  };
+  row.querySelector(".increase").onclick = () => {
+    if (p.value < 4) p.value++;
+    updatePower(system.id, allianceId, p.value);
+    drawMap();
+    showDetailMenu(system);
+  };
+  powerDiv.appendChild(row);
+});
+detailMenu.appendChild(powerDiv);
 
   // --- INFRASTRUCTURE CONTROL ---
   if (isAdmin) {
