@@ -180,25 +180,29 @@ function drawMap() {
   });
   ctx.setLineDash([]);
 
-  // --- DRAW SYSTEMS ---
-  systems.forEach(s => {
-    const img = s.type === "planet" ? planetImg : moonImg;
-    const size = s.type === "planet" ? 65 : 50;
-    ctx.drawImage(img, s.x - size / 2, s.y - size / 2, size, size);
+// --- DRAW SYSTEMS ---
+systems.forEach(s => {
+  const img = s.type === "planet" ? planetImg : moonImg;
+  const size = s.type === "planet" ? 65 : 50;
+  ctx.drawImage(img, s.x - size / 2, s.y - size / 2, size, size);
 
-    ctx.fillStyle = "#fff";
-    ctx.font = "14px Arial";
-    ctx.fillText(s.name, s.x - ctx.measureText(s.name).width / 2, s.y - 28);
+  ctx.fillStyle = "#fff";
+  ctx.font = "14px Arial";
+  ctx.fillText(s.name, s.x - ctx.measureText(s.name).width / 2, s.y - 28);
 
-    const offsetY = 35;
-    s.powers.forEach((p, idx) => {
-      const colors = ["#00f","#f00", "#0f0"];
-      ctx.fillStyle = colors[p.alliance_id - 1];
-      ctx.fillRect(s.x - 20, s.y + offsetY + idx * 12, p.value * 10, 12);
-      ctx.strokeStyle = "#fff";
-      ctx.strokeRect(s.x - 20, s.y + offsetY + idx * 12, 40, 12);
-    });
+  const offsetY = 35;
+
+  // 🔹 Fix ordre des alliances : Défenseur, Envahisseur, Pirate
+  const allianceOrder = [1, 2, 3]; // IDs fixes
+  allianceOrder.forEach((allianceId, idx) => {
+    const p = s.powers.find(power => power.alliance_id === allianceId) || { value: 0 };
+    const colors = ["#00f","#f00","#0f0"];
+    ctx.fillStyle = colors[allianceId - 1];
+    ctx.fillRect(s.x - 20, s.y + offsetY + idx * 12, p.value * 10, 12);
+    ctx.strokeStyle = "#fff";
+    ctx.strokeRect(s.x - 20, s.y + offsetY + idx * 12, 40, 12);
   });
+});
 
   // --- DRAW FLEETS ---
   systems.forEach(sys => {
